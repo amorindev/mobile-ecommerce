@@ -1,0 +1,1 @@
+android:launchMode="singleTop" -> android:launchMode="singleTask"

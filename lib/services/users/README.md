@@ -1,0 +1,1 @@
+creo el user aqui o lo dejo en auth, o dos user clases
