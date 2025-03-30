@@ -72,7 +72,7 @@ class AppRouter2 {
   static final GoRouter router = GoRouter(
     //initialLocation: AppRoutes.signInRoute,
     initialLocation: AppRoutes.authBlocListernScreen,
-    navigatorKey: _rootNavHome,
+    navigatorKey: _rootNavKey,
     //initialLocation: AppRoutes.authListernScreen,
     debugLogDiagnostics: true, // quitar en producción
     routes: <RouteBase>[
