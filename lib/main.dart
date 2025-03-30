@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
+import 'package:flu_go_jwt/services/auth/bloc/auth_observer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flu_go_jwt/app.dart';

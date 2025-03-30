@@ -69,10 +69,9 @@ class AuthStateNeedsVerification extends AuthState {
 // * si el backen retorna el usuario al sign up logout puede tener el user¡
 class AuthStateSignedOut extends AuthState {
   final Exception? exception;
-
+  
   const AuthStateSignedOut({
     required this.exception,
-
     required super.isLoading,
     super.loadingText,
   });

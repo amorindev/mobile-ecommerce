@@ -125,3 +125,9 @@ if (state is WrongPasswordAuthException) {
 
 
 <!-- ! lo que puede estar afectando es los props de equatable en branchio que no refresaca -->
+
+navega con bloc cuando no necesitas vover atras
+si se puede agregando preiuspage y ver en conjunto como funciona
+pero es mejor con go router 
+si el usuario hace click en forgot password podrá volver
+pero si lo haces mediante bloc  no podrás

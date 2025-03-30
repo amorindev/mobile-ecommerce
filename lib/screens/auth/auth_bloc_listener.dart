@@ -1,13 +1,10 @@
 import 'package:flu_go_jwt/main.dart';
-import 'package:flu_go_jwt/router/routes.dart';
 import 'package:flu_go_jwt/screens/auth/email_verified_screen.dart';
 import 'package:flu_go_jwt/screens/auth/sign_in_screen.dart';
 import 'package:flu_go_jwt/screens/auth/sign_up_screen.dart';
 import 'package:flu_go_jwt/screens/auth/email_verification_test.dart';
-import 'package:flu_go_jwt/screens/email_verification_screen.dart';
 import 'package:flu_go_jwt/screens/home_screen.dart';
 import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
-import 'package:flu_go_jwt/utils/helpers/loading/loading_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

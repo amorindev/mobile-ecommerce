@@ -38,6 +38,7 @@ class AppRouter {
         );
       case AppRoutes.emailVerifiedRoute:
         return MaterialPageRoute(
+          // * recover
           builder: (context) => const EmailVerificationScreen(),
         );
 
@@ -68,7 +69,7 @@ class AppRouter2 {
   static final _rootNavProfile = GlobalKey<NavigatorState>(
     debugLabel: 'shellProfile',
   );
-  static Route<dynamic>? onGenerateRoute2(RouteSettings settings) {}
+  //static Route<dynamic>? onGenerateRoute2(RouteSettings settings) {}
   static final GoRouter router = GoRouter(
     //initialLocation: AppRoutes.signInRoute,
     initialLocation: AppRoutes.authBlocListernScreen,
@@ -102,7 +103,7 @@ class AppRouter2 {
       GoRoute(
         path: AppRoutes.authBlocListernScreen,
         builder: (context, state) {
-          context.read<AuthBloc>().add(const AuthEventInitialize());
+          //context.read<AuthBloc>().add(const AuthEventInitialize());
           return const AuthBlocListener();
         },
       ),

@@ -19,15 +19,7 @@ part 'auth_state.dart';
 // ! estas usando el current user pero el current user se saca de localstorage
 // ! no del estado
 
-class AuthBlocObserver extends BlocObserver {
-  @override
-  void onChange(BlocBase bloc, Change change) {
-    super.onChange(bloc, change);
-    print("----------------------------- observer");
-    print('${bloc.runtimeType} $change');
-    print("----------------------------- observer");
-  }
-}
+
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final BranchioService _srv = BranchioService();
