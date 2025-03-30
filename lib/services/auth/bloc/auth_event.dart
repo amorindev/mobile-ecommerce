@@ -137,3 +137,8 @@ class AuthEventBranchIoEventSuscribe extends AuthEvent {
 class AuthEventBranchIoEventCancellAllSuscriptions extends AuthEvent {
   const AuthEventBranchIoEventCancellAllSuscriptions();
 }
+
+class AuthEventNewTokenReceived extends AuthEvent {
+  final String token;
+  const AuthEventNewTokenReceived({required this.token});
+}

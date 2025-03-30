@@ -18,6 +18,17 @@ part 'auth_state.dart';
 // ? cundo realizo a current user siempre es de local storage?
 // ! estas usando el current user pero el current user se saca de localstorage
 // ! no del estado
+
+class AuthBlocObserver extends BlocObserver {
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    super.onChange(bloc, change);
+    print("----------------------------- observer");
+    print('${bloc.runtimeType} $change');
+    print("----------------------------- observer");
+  }
+}
+
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final BranchioService _srv = BranchioService();
   // ? como inicializar
@@ -58,32 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       print("Initialize!!!!!!!!!!!!!!");
       // wait provider.initiaize();
       // ver si el token es válido o pedor al
-      _branchIoSuscription = _srv.branchIoStream.listen(
-        (data) async {
-          if (data.isNotEmpty) {
-            "BranchioService -  data is not empty".log();
-            // if (data != null && data.containsKey('token'))
-            if (data.containsKey('token')) {
-              String? token = data['token'];
-              if (token != null) {
-                "BranchioService -  token is not empty this is a token".log();
-                token.log();
-                "----------------------------------".log();
-                emit(
-                  AuthStateBranchIoStateDeepLinkToken(
-                      token: token, isLoading: false),
-                );
-              }
-            }
-          } else {
-            "BranchioService -  data is empty".log();
-          }
-        },
-        onError: (error) {
-          ("Branchio err $error").log();
-          // ? emitir estado?
-        },
-      );
+
       final session = await provider.currentUser;
       if (session == null) {
         emit(const AuthStateSignedOut(exception: null, isLoading: false));
@@ -211,6 +197,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthEventBranchIoEventSuscribe>((event, emit) async {
+      emit(const AuthStateBranchIoStateDeepLinkToken(
+          token: "my-token", isLoading: false));
       _branchIoSuscription = _srv.branchIoStream.listen(
         (data) async {
           if (data.isNotEmpty) {
@@ -222,10 +210,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 "BranchioService -  token is not empty this is a token".log();
                 token.log();
                 "----------------------------------".log();
-                emit(
+                /* emit(
                   AuthStateBranchIoStateDeepLinkToken(
-                      token: token, isLoading: false),
-                );
+                    token: token,
+                    isLoading: false,
+                  ),
+                ); */
+                add(AuthEventNewTokenReceived(token: token));
               }
             }
           } else {
@@ -237,6 +228,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           // ? emitir estado?
         },
       );
+    });
+    on<AuthEventNewTokenReceived>((event, emit) {
+      emit(AuthStateBranchIoStateDeepLinkToken(
+        token: event.token,
+        isLoading: false,
+      ));
     });
 
     /* on<BranchIoEventCancellAllSuscriptions>((event, emit) {

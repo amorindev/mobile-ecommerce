@@ -1,8 +1,9 @@
 import 'package:flu_go_jwt/main.dart';
 import 'package:flu_go_jwt/router/routes.dart';
+import 'package:flu_go_jwt/screens/auth/email_verified_screen.dart';
 import 'package:flu_go_jwt/screens/auth/sign_in_screen.dart';
 import 'package:flu_go_jwt/screens/auth/sign_up_screen.dart';
-import 'package:flu_go_jwt/screens/auth/verify_email_screen.dart';
+import 'package:flu_go_jwt/screens/auth/email_verification_test.dart';
 import 'package:flu_go_jwt/screens/email_verification_screen.dart';
 import 'package:flu_go_jwt/screens/home_screen.dart';
 import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
@@ -20,19 +21,22 @@ class AuthBlocListener extends StatefulWidget {
 class _AuthBlocListenerState extends State<AuthBlocListener> {
   @override
   Widget build(BuildContext context) {
+    // ! Dos cosas ver si esto en cada rebuil cuando hago click en el branchio
+    // ! buelve a ejecutarse por que mantenedria en un sooestado
+    // ! Ademas implementar en un blocObserver
     context.read<AuthBloc>().add(const AuthEventInitialize());
-    //context.read<AuthBloc>().add(const AuthEventBranchIoEventSuscribe());
+    context.read<AuthBloc>().add(const AuthEventBranchIoEventSuscribe());
     // * como se comporta AuthProviderListener y AuthBLocListener
     // * Cuando se presiona el backButton
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         print("State: $state");
-        if (state.isLoading) {
-          //LoadingScreenController().s
-        }
+          "---------------------------state".log();
+          state.log();
+          "---------------------------state".log();
         if (state is AuthStateBranchIoStateDeepLinkToken) {
           "********************************************3".log();
-          //return const EmailVerificationScreen();
+          //return const EmailVerificationScreen(); 
           /* Navigator.of(context).pushNamed(
             AppRoutes.emailVerifiedRoute,
           ); */
@@ -63,23 +67,22 @@ class _AuthBlocListenerState extends State<AuthBlocListener> {
           return const HomeScreen();
         } else if (state is AuthStateNeedsVerification) {
           "*********************************************2".log();
-          return const VerifyEmailScreen();
+          return const EmailVerificationTest();
         } else if (state is AuthStateSignedOut) {
           "*********************************************4".log();
-          if (state is AuthStateBranchIoStateDeepLinkToken) {
+          /* if (state is AuthStateBranchIoStateDeepLinkToken) {
             return Scaffold(
-              appBar: AppBar(title: const Text("llegamos"),),
-            );
-          }
+              appBar: AppBar(
+                title: const Text("llegamos"),
+              ),
+            );  
+            
+          } */
           return const SignInScreen();
         } else if (state is AuthStateBranchIoStateDeepLinkToken) {
           "********************************************3".log();
           //return const EmailVerificationScreen();
-          return const Scaffold(
-            body: Center(
-              child: Text('llegamos '),
-            ),
-          );
+          return const EmailVerifiedScreen();
         } else if (state is AuthStateRegistering) {
           "*********************************************5".log();
           return const SignUpScreen();

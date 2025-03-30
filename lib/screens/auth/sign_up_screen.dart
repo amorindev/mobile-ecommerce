@@ -1,4 +1,5 @@
 import 'package:flu_go_jwt/design/colors.dart';
+import 'package:flu_go_jwt/router/routes.dart';
 import 'package:flu_go_jwt/screens/auth/widgets/custom_button.dart';
 import 'package:flu_go_jwt/screens/auth/widgets/custom_textfield.dart';
 import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:flu_go_jwt/services/auth/provider/provider.dart';
 import 'package:flu_go_jwt/utils/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -140,7 +142,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // ! Recuerda que sign ou puede tener otras responsabiidades
                         // ! no solo navegar a login
                         // ! mejor es crear otro como AuthEventShouldSignUp
-                        context.read<AuthBloc>().add(const AuthEventSignOut());
+                        //context.read<AuthBloc>().add(const AuthEventSignOut());
+                        //GoRouter.of(context).go(AppRoutes.signInRoute);
+                        // ! hacer try catch? 
+                        // * pop causa error mejor solo go 
+                        // * probar el backbutton 
+                        // Funcionaaaaaaaaaaaaaaaaaaaaaaaaaa
+                        // ver todo el flijo si es necesario try catch ysolo return parano producir errores
+                        GoRouter.of(context).pop();
                       },
                       child: const Text('Already registered? Login here!'),
                     )

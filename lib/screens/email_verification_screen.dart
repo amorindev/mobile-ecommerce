@@ -1,43 +1,31 @@
-import 'package:flu_go_jwt/services/branchio/provider/provider.dart';
+import 'package:flu_go_jwt/router/routes.dart';
+import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-/* class EmailVerificationScreen extends StatelessWidget {
-  const EmailVerificationScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final branchIoProvider = Provider.of<BranchIoProvider>(context);
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: [
-            branchIoProvider.deepLinkData != null
-                ? Column(
-                    children: [
-                      Text(branchIoProvider.deepLinkData.toString()),
-                      Text(branchIoProvider.deepLinkData!['token'])
-                    ],
-                  )
-                : const Text("is nullllllll")
-          ],
-        ),
-      ),
-    );
-  }
-} */
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Text("llegamossssssssssssssssssss"),
-        ),
-      ),
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthStateBranchIoStateDeepLinkToken) {
+          if (!state.isLoading) {
+            GoRouter.of(context).go(AppRoutes.emailVerifiedRoute);
+          }
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: SafeArea(
+            child: ListView(
+              children: const [Text("Email verified successfully")],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,17 +1,19 @@
-import 'package:flu_go_jwt/go_flutter_page.dart';
-import 'package:flu_go_jwt/main.dart';
 import 'package:flu_go_jwt/practice2_screen.dart';
 import 'package:flu_go_jwt/router/routes.dart';
 import 'package:flu_go_jwt/screens/auth/auth_bloc_listener.dart';
 import 'package:flu_go_jwt/screens/auth/auth_provider_listener.dart';
+import 'package:flu_go_jwt/screens/auth/email_verified_screen.dart';
 import 'package:flu_go_jwt/screens/auth/sign_in_screen.dart';
 import 'package:flu_go_jwt/screens/auth/sign_up_screen.dart';
-import 'package:flu_go_jwt/screens/auth/verify_email_screen.dart';
+import 'package:flu_go_jwt/screens/auth/email_verification_test.dart';
 import 'package:flu_go_jwt/screens/bottom_nav_bar.dart';
 import 'package:flu_go_jwt/screens/email_verification_page.dart';
+import 'package:flu_go_jwt/screens/email_verification_screen.dart';
 import 'package:flu_go_jwt/screens/home_screen.dart';
 import 'package:flu_go_jwt/screens/profile_screen.dart';
+import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 // EN el caso de un ecommerce lo mejor seria ir a home agregar productos
@@ -24,28 +26,60 @@ import 'package:go_router/go_router.dart';
 // * pero no tiene la funcionalidad de ir a la tienda si no esta instalada la app
 // * hacer un lego software?
 class AppRouter {
-  AppRouter._();
+  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRoutes.signInRoute:
+        return MaterialPageRoute(
+          builder: (context) => const SignInScreen(),
+        );
+      case AppRoutes.authBlocListernScreen:
+        return MaterialPageRoute(
+          builder: (context) => const AuthBlocListener(),
+        );
+      case AppRoutes.emailVerifiedRoute:
+        return MaterialPageRoute(
+          builder: (context) => const EmailVerificationScreen(),
+        );
 
-  static final rootNavKey = GlobalKey<NavigatorState>();
+      /* default:
+        return MaterialPageRoute(
+          builder: (context) => const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(
+                color: Colors.amber,
+              ),
+            ),
+          ),
+        ); */
+      default:
+        return MaterialPageRoute(
+          builder: (context) => const AuthBlocListener(),
+        );
+    }
+  }
+}
+
+class AppRouter2 {
+  AppRouter2._();
+  static final _rootNavKey = GlobalKey<NavigatorState>();
   static final _rootNavHome = GlobalKey<NavigatorState>(
     debugLabel: 'shellHome',
   );
   static final _rootNavProfile = GlobalKey<NavigatorState>(
     debugLabel: 'shellProfile',
   );
-
+  static Route<dynamic>? onGenerateRoute2(RouteSettings settings) {}
   static final GoRouter router = GoRouter(
+    //initialLocation: AppRoutes.signInRoute,
     initialLocation: AppRoutes.authBlocListernScreen,
+    navigatorKey: _rootNavHome,
     //initialLocation: AppRoutes.authListernScreen,
-    navigatorKey: rootNavKey,
     debugLogDiagnostics: true, // quitar en producción
     routes: <RouteBase>[
       GoRoute(
         path: AppRoutes.practice,
         //builder: (context, state) => const PracticeScreen(),
         builder: (context, state) => const Practice2Screen(),
-        
-      
       ),
       /* GoRoute(
         path: AppRoutes.branchioPageTest,
@@ -59,35 +93,34 @@ class AppRouter {
           ),
         ),
       ),
-      /* GoRoute(
-        path: '/open/:id',
-        builder: (context, state) => const GoFlutterPage(),
-      ),
-      GoRoute(
-        path: '/:token',
-        builder: (context, state) {
-          return EmailVerificationPage(token: state.pathParameters['token']!);
-        },
-      ), */
       GoRoute(
         path: AppRoutes.authProviderListernScreen,
-        builder: (context, state) => const AuthProviderListener(),
+        builder: (context, state) {
+          return const AuthProviderListener();
+        },
       ),
       GoRoute(
         path: AppRoutes.authBlocListernScreen,
-        builder: (context, state) => const AuthBlocListener(),
+        builder: (context, state) {
+          context.read<AuthBloc>().add(const AuthEventInitialize());
+          return const AuthBlocListener();
+        },
       ),
       GoRoute(
         path: AppRoutes.signInRoute,
         builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
-        path: AppRoutes.signInRoute,
+        path: AppRoutes.signUpRoute,
         builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
-        path: AppRoutes.signInRoute,
-        builder: (context, state) => const VerifyEmailScreen(),
+        path: AppRoutes.emailVerifiedRoute,
+        builder: (context, state) => const EmailVerifiedScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.verifyEmailRoute,
+        builder: (context, state) => const EmailVerificationScreen(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -144,7 +177,22 @@ final appRouter = GoRouter(
       },
     ),
   ],
-  redirect: (context, state) {
+  /* redirect: (context, state) {
+    // lo que quiero es que navego el usario y un cambio
+    final authState = context.read<AuthBloc>().state;
+    // si el estado global tiene user
+    //if (state.user) {}
+    // * aqui lo que no quiero es que se mantenga en sign in cuando el usario navego a otra pantalla
+    // ? se debe verificar is loading y el error?
+    if (authState is AuthStateSignedIn) {
+      return AppRoutes.homeRoute;
+    }
+    if (authState is AuthStateNeedsVerification) {
+      return AppRoutes.verifyEmailRoute;
+    }
+    if (authState is AuthStateSignedOut) {
+      return AppRoutes.signInRoute;
+    }
     return "";
-  },
+  }, */
 );

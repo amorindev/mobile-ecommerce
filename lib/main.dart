@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flu_go_jwt/app.dart';
 import 'package:flu_go_jwt/services/auth/constants/constants.dart';
 import 'package:flu_go_jwt/services/auth/models/model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 
 import 'dart:developer' as developer show log;
@@ -44,6 +46,7 @@ Future<void> main() async {
   await Hive.openBox<Session>(AppConstants.authHiveKey);
   //await Hive.openBox<List<Session>>("auth");
 
+  Bloc.observer = AuthBlocObserver();
   runApp(const MainApp());
 }
 
