@@ -19,13 +19,14 @@ part 'auth_state.dart';
 // ! estas usando el current user pero el current user se saca de localstorage
 // ! no del estado
 
-
-
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final BranchioService _srv = BranchioService();
   // ? como inicializar
   late StreamSubscription<Map<dynamic, dynamic>> _branchIoSuscription;
   //late final StreamSubscription<Map<dynamic, dynamic>>? streamSubscription;
+
+  // final MyRepo repo;
+  // MyBloc(this.repo)
 
   AuthBloc(AuthGateway provider)
       // debería ser false y dentro del evento AuthEventInitialize recien true
@@ -189,8 +190,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthEventBranchIoEventSuscribe>((event, emit) async {
-      emit(const AuthStateBranchIoStateDeepLinkToken(
-          token: "my-token", isLoading: false));
+      /* emit(const AuthStateBranchIoStateDeepLinkToken(
+          token: "my-token", isLoading: false)); */
       _branchIoSuscription = _srv.branchIoStream.listen(
         (data) async {
           if (data.isNotEmpty) {
@@ -218,6 +219,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         onError: (error) {
           ("Branchio err $error").log();
           // ? emitir estado?
+          // si quieres mostrar el error
+          //add(AuthEventError(error.toString()));
         },
       );
     });
@@ -231,6 +234,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     /* on<BranchIoEventCancellAllSuscriptions>((event, emit) {
       onCancelSuscription(event, emit, _branchIoSuscription);
     }); */
+
+    // close seria para cerrar todo este solo para branchio
+    on<CancelarSuscripcion>((event, emit) {
+      _branchIoSuscription.cancel();
+    });
   }
   @override
   Future close() {

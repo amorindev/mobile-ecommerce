@@ -55,6 +55,32 @@ class MainApp extends StatelessWidget {
           create: (context) => BranchIoBloc(),
         )
       ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: Brightness.light,
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        routerConfig: AppRouter.router,
+      ),
+    );
+  }
+}
+
+/* class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(ApiDioGateway()),
+        ),
+        BlocProvider<BranchIoBloc>(
+          create: (context) => BranchIoBloc(),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -65,4 +91,4 @@ class MainApp extends StatelessWidget {
       ),
     );
   }
-}
+} */

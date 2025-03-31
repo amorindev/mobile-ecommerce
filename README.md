@@ -131,3 +131,10 @@ si se puede agregando preiuspage y ver en conjunto como funciona
 pero es mejor con go router 
 si el usuario hace click en forgot password podrá volver
 pero si lo haces mediante bloc  no podrás
+
+// *  los diagramas de google sign in
+y de register cuando el usuario confirma retorna a la app donde muestra la pantalla y
+al cargar la pantalla envia el token al back y retorna la sesion
+para que el usuario no vuelva a loguearse
+
+como usar spacer

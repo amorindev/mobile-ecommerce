@@ -1,4 +1,4 @@
-import 'package:flu_go_jwt/main.dart';
+/* import 'package:flu_go_jwt/main.dart';
 import 'package:flu_go_jwt/screens/auth/sign_in_screen.dart';
 import 'package:flu_go_jwt/screens/email_verification_screen.dart';
 import 'package:flu_go_jwt/screens/home_screen.dart';
@@ -41,4 +41,4 @@ class _AuthProviderListenerState extends State<AuthProviderListener> {
       },
     );
   }
-}
+} */

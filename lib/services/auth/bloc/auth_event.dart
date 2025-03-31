@@ -142,3 +142,6 @@ class AuthEventNewTokenReceived extends AuthEvent {
   final String token;
   const AuthEventNewTokenReceived({required this.token});
 }
+class CancelarSuscripcion extends AuthEvent{
+  const CancelarSuscripcion();
+}

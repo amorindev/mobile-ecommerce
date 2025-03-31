@@ -44,9 +44,6 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) async {
-        "************************".log();
-        state.log();
-        "************************".log();
         // * 1. Termina el inicialice el usuario es SignedOut con error nulo loading nulo
         // * 2. Hace click el usuario - esta en loading y los otros null - saltará el primer if
         // * 3. cuando termina correcto o retorna un error - loading debe ser false
@@ -62,6 +59,12 @@ class _SignInScreenState extends State<SignInScreen> {
             _closeDialogHandle =
                 showLoadingDialog(context: context, text: 'Loading');
           } */
+
+          // * mejorarlo
+          if (state.exception != null) {
+            // weincode agrega en las exceptiones el string mas limpio menos validaciones
+            await showErrorDialog(context, state.exception.toString());
+          }
 
           if (state.exception is UserNotFoundAuthException) {
             await showErrorDialog(
@@ -169,10 +172,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
 
-              //Spacer()
-              // * Si no tienes un  cuenta registrate
-
-              // * Parte 2
               /* authProvider.isLoggedIn
                   ? const Text("user loggued in")
                   : const Text("user is not loggued in"),
@@ -184,14 +183,22 @@ class _SignInScreenState extends State<SignInScreen> {
 
               // * RememberMe, Diegoveloper hizo un en vivo donde no se necesita agregar un set estate
               // * sino un widget de animación que se usba para eso
-              Checkbox(
-                value: isChecked,
-                onChanged: (value) {
-                  setState(() {
-                    isChecked = value!;
-                  });
-                },
+              Row(
+                children: [
+                  Checkbox(
+                    value: isChecked,
+                    onChanged: (value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                  ),
+                  // esto es cuando el access token no caduca, el back retorna access y refresh token nuevamente
+                  // o es como lo estaos haciendo solo retorna nuevo access token
+                  const Text("Keep me signed in")
+                ],
               ),
+
               // * Sign in email-password
               TextButton(
                 onPressed: () async {
@@ -230,7 +237,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 },
                 child: const Text("user is logged in"),
               ),
-              
+
               TextButton(
                 onPressed: () async {
                   GoRouter.of(context).push(AppRoutes.signUpRoute);

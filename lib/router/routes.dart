@@ -4,8 +4,6 @@ class AppRoutes {
   // cuando usar /, sin / rutas hijas del GoRoute y rutas anidaas del shellRoute
   static const String branchioPageTest = '/branchio';
   static const String goFlutter = '/open';
-  static const String practice = '/practice';
-  static const String practice2 = '/practice2';
   static const String authProviderListernScreen = '/auth-provider-listener';
   static const String authBlocListernScreen = '/auth-bloc-listener';
 

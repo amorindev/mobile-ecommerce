@@ -19,13 +19,7 @@ class BranchIoBloc extends Bloc<BranchIoEvent, BranchIoState> {
     //_onSuscribe();
     on<BranchIoEvent>((event, emit) {});
 
-    
-
-    
-
     // 0 debajo
-    "-----------------------test".log();
-    print("-----------------------test");
     //_onSuscribe();
   }
 
