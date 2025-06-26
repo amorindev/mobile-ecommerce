@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flu_go_jwt/main.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -16,10 +15,9 @@ class GoogleSignInService {
   GoogleSignInService() {
     final clientID = dotenv.env['GOOGLE_CLIENT_ID'];
     if (clientID == null || clientID == "") {
-      clientID.toString().log();
       throw Exception("GoogleClientID is null");
     }
-    clientID.toString().log();
+    //clientID.toString().log();
     _googleSignIn = GoogleSignIn(
       clientId: clientID,
       scopes: ['openid', 'email', 'profile'],
@@ -33,21 +31,21 @@ class GoogleSignInService {
       final account = await _googleSignIn.signIn();
       //account.toString().log();
       if (account == null) {
-        'Sign in screen - signIn: user is null'.log();
+        //'Sign in screen - signIn: user is null'.log();
         return (null, null, "Sign in screen - signIn: account is null");
       }
 
       final auth = await account.authentication;
       final idToken = auth.idToken;
       if (idToken == null) {
-        'Sign in screen - signIn: idToken us null'.log();
+        //'Sign in screen - signIn: idToken us null'.log();
         return (null, null, "Sign in screen - signIn: idToken us null");
       }
 
       // ? como manejar el acces token ?
       final accesToken = auth.accessToken;
       if (accesToken == null) {
-        'Sign in screen - signIn: access token is null'.log();
+        //'Sign in screen - signIn: access token is null'.log();
         return (null, null, "Sign in screen - signIn: access token is null");
         // ? no deverpia ser throw para atrapar con el catch?
       }
@@ -76,13 +74,13 @@ class GoogleSignInService {
   StreamSubscription<GoogleSignInAccount?> googleSignInSuscription() {
     return _googleSignIn.onCurrentUserChanged.listen((account) async {
       if (account == null) {
-        "GoogleSignInService account is null".log();
+        //"GoogleSignInService account is null".log();
       } else {
-        "****************** user google *****************".log();
+        //"****************** user google *****************".log();
         final auth = await account.authentication;
-        account.email.log();
-        auth.idToken!.log();
-        "****************** user google *****************".log();
+        //account.email.log();
+        //auth.idToken!.log();
+        //"****************** user google *****************".log();
       }
     });
   }
@@ -97,11 +95,11 @@ class GoogleSignInService {
 
       final auth = await account.authentication;
 
-      print(account.email);
-      print(auth.idToken);
+      //print(account.email);
+      //print(auth.idToken);
       throw Exception("revisar");
     } catch (e) {
-      print(" ********************* ${e.toString()}");
+      //print(" ********************* ${e.toString()}");
     }
     return _googleSignIn.signInSilently();
   }

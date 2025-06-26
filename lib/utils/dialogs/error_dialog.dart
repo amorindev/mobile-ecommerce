@@ -6,6 +6,7 @@ Future<void> showErrorDialog(
   String text,
 ) {
   return showGenericDialog<void>(
+    
     context: context,
     title: 'An error occurred',
     content: text,

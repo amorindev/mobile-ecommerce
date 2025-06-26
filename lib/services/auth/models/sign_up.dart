@@ -3,56 +3,34 @@
 //
 //     final authCreateRequest = authCreateRequestFromJson(jsonString);
 
-import 'dart:convert';
+/* import 'dart:convert';
 
-AuthCreateRequest authCreateRequestFromJson(String str) =>
-    AuthCreateRequest.fromJson(json.decode(str));
+import 'package:flu_go_jwt/services/auth/models/user.dart'; */
 
-String authCreateRequestToJson(AuthCreateRequest data) =>
-    json.encode(data.toJson());
+/* SignUpResponse signUpResponseFromJson(String str) => SignUpResponse.fromJson(json.decode(str));
 
-class AuthCreateRequest {
-  String email;
-  String password;
-  UserCreateRequest user;
+String signUpResponseToJson(SignUpResponse data) => json.encode(data.toJson());
 
-  AuthCreateRequest({
-    required this.email,
-    required this.password,
-    required this.user,
-  });
+class SignUpResponse {
+    String provider;
+    String otpId;
+    User user;
 
-  factory AuthCreateRequest.fromJson(Map<String, dynamic> json) =>
-      AuthCreateRequest(
-        email: json["email"],
-        password: json["password"],
-        user: UserCreateRequest.fromJson(json["user"]),
-      );
+    SignUpResponse({
+        required this.provider,
+        required this.otpId,
+        required this.user,
+    });
 
-  Map<String, dynamic> toJson() => {
-        "email": email,
-        "password": password,
+    factory SignUpResponse.fromJson(Map<String, dynamic> json) => SignUpResponse(
+        provider: json["provider"],
+        otpId: json["otp_id"],
+        user: User.fromJson(json["user"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "provider": provider,
+        "otp_id": otpId,
         "user": user.toJson(),
-      };
-}
-
-class UserCreateRequest {
-  String username;
-  String name;
-
-  UserCreateRequest({
-    required this.username,
-    required this.name,
-  });
-
-  factory UserCreateRequest.fromJson(Map<String, dynamic> json) =>
-      UserCreateRequest(
-        username: json["username"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "username": username,
-        "name": name,
-      };
-}
+    };
+} */

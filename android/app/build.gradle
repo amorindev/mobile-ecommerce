@@ -7,6 +7,12 @@ plugins {
     //  id("com.google.gms.google-services") version "4.4.2" apply false
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace = "com.fernando.flu_go_jwt"
     compileSdk = 35
@@ -26,8 +32,14 @@ android {
         applicationId = "com.fernando.flu_go_jwt"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        
+        //minSdk = flutter.minSdkVersion
+        // minSdk = 23
+        minSdk = 24
+        
+        //targetSdk = flutter.targetSdkVersion
+        targetSdk = 34
+        
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
@@ -36,24 +48,58 @@ android {
         // como agregar release
         // usa variables de entorno?
         // password release la ultima opcion o mantener android?
-        debug {
+        /* debug {
             keyAlias 'upload'
             keyPassword 'android'
             storeFile file('go-flu-jwt-key.jks')
             storePassword 'android'
+        } */
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
-
+    
     buildTypes {
         debug {
-            signingConfig signingConfigs.debug
+            //signingConfig signingConfigs.debug
         }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            signingConfig = signingConfigs.release
         }
     }
+
+    // *  Add flavors
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            //resValue "string", "app_name", "App-dev"
+            resValue "string", "app_name", "App dev"
+            applicationIdSuffix ".dev"
+        }
+        prod {
+            resValue "string", "app_name", "NewAthletic"
+            // no hay necesidad poner un sufijo para produccion
+            //applicationIdSuffix ""
+            // envs 
+            resValue "string", "google_maps_key", ""
+            // faltaria los links de live 
+            resValue "string", "branchio_link", ""
+            resValue "string", "branchio_alternative_link", ""
+            // example: key_live_XXX, no lo encuentro de momento
+            resValue "string", "branchio_key", ""
+            // example: key_test_XXX
+            resValue "string", "branchio_key_test", ""
+            // testmode
+            resValue "string", "branchio_test_mode", ""
+
+        }
+    }
+    // * -------------------------
 }
 //added
 dependencies {

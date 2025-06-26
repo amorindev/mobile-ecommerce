@@ -1,85 +1,43 @@
-import 'package:flu_go_jwt/router/router.dart';
-import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
-import 'package:flu_go_jwt/services/auth/use_cases/api/api_dio_gateway.dart';
-import 'package:flu_go_jwt/services/branchio/bloc/branch_io_bloc.dart';
+import 'package:flu_go_jwt/router/app_router.dart';
+import 'package:flu_go_jwt/router/ongenerate/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/* class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class AppPrincipal extends StatelessWidget {
+  const AppPrincipal({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(ApiDioGateway()),
-        ),
-        BlocProvider<BranchIoBloc>(
-          create: (context) => BranchIoBloc(),
-        )
-      ],
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<AuthProvider>(
-            create: (_) => AuthProvider(),
-          ),
-          ChangeNotifierProvider<BranchIoProvider>(
-            create: (_) => BranchIoProvider(),
-          )
-        ],
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            brightness: Brightness.light,
-            scaffoldBackgroundColor: Colors.white,
-          ),
-          routerConfig: AppRouter.router,
-        ),
-      ),
-    );
-  }
-} */
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(ApiDioGateway()),
-        ),
-        BlocProvider<BranchIoBloc>(
-          create: (context) => BranchIoBloc(),
-        )
-      ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
+    return MaterialApp.router(
+      
+      debugShowCheckedModeBanner: false,
+      color: Colors.white,
+      //theme: ThemeData.light(),
+      /* theme: ThemeData(
           brightness: Brightness.light,
           scaffoldBackgroundColor: Colors.white,
-        ),
-        routerConfig: AppRouter.router,
+        ), */
+      // ! los componentes emergentes estan en morado revisar y el loading
+      // ! los bordes de los container gray no negro opaca
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.white,
       ),
+      routerConfig: AppRouter.router,
     );
   }
 }
 
-/* class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+// * Con ongenerated
+class MainApp2 extends StatelessWidget {
+  const MainApp2({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBloc>(
+        /* BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(ApiDioGateway()),
-        ),
-        BlocProvider<BranchIoBloc>(
-          create: (context) => BranchIoBloc(),
-        )
+        ), */
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -87,8 +45,29 @@ class MainApp extends StatelessWidget {
           brightness: Brightness.light,
           scaffoldBackgroundColor: Colors.white,
         ),
-        onGenerateRoute: AppRouter.onGenerateRoute,
+        /* onGenerateInitialRoutes: (initialRoute) {
+          no se para que se usa
+        }, */
+        initialRoute: "/", // agregarloa al AppRoutes
+        onGenerateRoute: OngeneratedRouter.onGenerateRoute,
       ),
     );
   }
-} */
+}
+
+/*
+MaterialApp(
+ initialRoute: '/',
+ onGenerateRoute: (RouteSettings settings) {
+  switch (settings.name) {
+   case '/':
+   // obtener el parámetro
+    return MaterialPageRoute(builder: (context) => HomePage());
+   case '/details':
+    return MaterialPageRoute(builder: (context) => DetailsPage());
+   default:
+    return MaterialPageRoute(builder: (context) => NotFoundPage());
+  }
+ },
+);
+ */

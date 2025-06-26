@@ -1,51 +1,37 @@
-import 'package:flu_go_jwt/router/routes.dart';
-import 'package:flu_go_jwt/screens/auth/auth_bloc_listener.dart';
+import 'package:flu_go_jwt/router/app_routes.dart';
 import 'package:flu_go_jwt/screens/auth/sign_in_screen.dart';
-import 'package:flu_go_jwt/screens/email_verification_screen.dart';
 import 'package:flutter/material.dart';
 
 class OngeneratedRouter {
-  /* static Route<dynamic>? Function(RouteSettings)? onGenerateRoute =
-      (settings) {
-    switch (settings.name) {
-      case AppRoutes.signInRoute:
-      return MaterialPageRoute(builder: (context) => const SignInScreen(),);
-      default:
-        return MaterialPageRoute(builder: (context) => Scaffold(body: Center(child: CircularProgressIndicator(),),),)
-    }
-  }; */
+  // *ver si conserva los datos par eso estan los blocs, responsabilidades
+  static Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (settings) {
+    //final args = settings.arguments;
 
-  static Route<dynamic>? onGenerateRoute2(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.signInRoute:
+        //final data = settings.arguments as String; // que pasa si es vacío o nulo
+        //if(data.isEmpty) return; no navegues
         return MaterialPageRoute(
           builder: (context) => const SignInScreen(),
         );
-      case AppRoutes.authBlocListernScreen:
-        return MaterialPageRoute(
-          builder: (context) => const AuthBlocListener(),
-        );
-      case AppRoutes.emailVerifiedRoute:
-        return MaterialPageRoute(
-          builder: (context) => const EmailVerificationScreen(),
-        );
 
-      /* default:
+      // * Agregar las demás rutas
+
+      default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
             body: Center(
-              child: CircularProgressIndicator(
-                color: Colors.amber,
-              ),
+              child: CircularProgressIndicator(),
             ),
           ),
-        ); */
-      default:
-        return MaterialPageRoute(
-          builder: (context) => const AuthBlocListener(),
         );
     }
-  }
+  };
+
+  /* static Route<dynamic>? onGenerateRoute2(RouteSettings settings) {
+    switch (settings.name) {
+    }
+  } */
 }
 
 /* Route<dynamic>? Function(RouteSettings)? onGenerateRoute = (settings) {
@@ -77,3 +63,38 @@ class OngeneratedRouter {
       return MaterialPageRoute(builder: (context) => const LoginPage());
   }
 }; */
+
+// TODO: ongenerated route
+/*
+bottomNavigationBar: BottomNavigationBar(
+  items: const <BottomNavigationBarItem>[
+    BottomNavigationBarItem(
+      label: 'Home',
+      icon: Icon(Icons.home),
+    ),
+    BottomNavigationBarItem(
+      label: 'Cart',
+      icon: Icon(Icons.add_shopping_cart),
+    ),
+    BottomNavigationBarItem(
+      label: 'Purchases',
+      icon: Icon(Icons.shopping_bag_outlined),
+    ),
+    BottomNavigationBarItem(
+      label: 'Profile',
+      icon: Icon(Icons.person),
+    ),
+  ],
+  currentIndex: _selectedIndex,
+  selectedItemColor: Colors.blue,             // Color del seleccionado
+  unselectedItemColor: Colors.grey,            // Color de los no seleccionados
+  onTap: (index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    _goToBranch(_selectedIndex);
+  },
+),
+
+
+ */

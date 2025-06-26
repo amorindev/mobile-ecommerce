@@ -1,4 +1,4 @@
-import 'package:flu_go_jwt/router/routes.dart';
+import 'package:flu_go_jwt/router/app_routes.dart';
 import 'package:flu_go_jwt/services/auth/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

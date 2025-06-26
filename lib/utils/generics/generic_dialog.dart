@@ -1,3 +1,4 @@
+import 'package:flu_go_jwt/design/foundations/app_colors.dart';
 import 'package:flutter/material.dart';
 
 typedef DialogOptionBuilder<T> = Map<String, T?> Function();
@@ -13,6 +14,7 @@ Future<T?> showGenericDialog<T>({
     context: context,
     builder: (context) {
       return AlertDialog(
+        backgroundColor: AppColors.whiteColor,
         title: Text(title),
         content: Text(content),
         actions: options.keys.map((optionTitle) {

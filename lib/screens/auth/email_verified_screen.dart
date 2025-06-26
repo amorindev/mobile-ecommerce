@@ -11,7 +11,7 @@ class EmailVerifiedScreen extends StatelessWidget {
       body: SafeArea(
           child: ListView(
         children: [
-          Text("I'm the best"),
+          const Text("I'm the best"),
           BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               if (state is AuthStateBranchIoStateDeepLinkToken) {

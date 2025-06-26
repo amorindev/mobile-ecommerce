@@ -1,0 +1,38 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    // el name es el nombre que aparece al lado del icono verde run 
+    {
+      "name": "dev",
+      "request": "launch",
+      "type": "dart",
+      // ruta
+      "program": "lib/env/main.dev.dart",
+      "args": [
+        "--flavor",
+        // app/build.gradle dev{} prod{}
+        "dev",
+        "target",
+        // el mismo de arriba
+        "lib/env/main.dev.dart"
+      ]
+    },
+    {
+      "name": "prod",
+      "request": "launch",
+      "type": "dart",
+      // ruta
+      "program": "lib/env/main.prod.dart",
+      "args": [
+        "--flavor",
+        "prod",
+        "target",
+        // el mismo de arriba
+        "lib/env/main.prod.dart"
+      ]
+    }
+  ]
+}

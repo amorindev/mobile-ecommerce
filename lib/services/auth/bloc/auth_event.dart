@@ -17,9 +17,10 @@ class AuthEventSendEmailVerification extends AuthEvent {
   const AuthEventSendEmailVerification();
 }
 
-class AuthEventTest extends AuthEvent {
-  const AuthEventTest();
+class AuthEventSendEmailVerificationOTP extends AuthEvent {
+  const AuthEventSendEmailVerificationOTP();
 }
+
 // * cuando lanzmos un verion nueva de la app y necesitamos otros datos, despues de login
 // * crear una pantalla pra solicitar daatos
 
@@ -42,31 +43,29 @@ class AuthEventSignIn extends AuthEvent {
 class AuthEventForgotPassword extends AuthEvent {
   // por que el usario puede intentar ingresar con un correo valido
   // y lo que da error es la contraseña
-  final String? email;
-  const AuthEventForgotPassword({this.email});
+  // * por que lo tiene el current use de firebase
+  // user just wants to go to forgot-password screen
+  final String email;
+  const AuthEventForgotPassword({required this.email});
 }
 
 // cuando el usuario sabe su anterior contraseñan NewPasssword o changePassaword
-class AurhEventChangePassword {}
+class AuthEventChangePassword extends AuthEvent {
+  const AuthEventChangePassword();
+}
 
 class AuthEventSignUp extends AuthEvent {
   final String email;
   final String password;
+  final String name;
   final String confirmPassword;
 
   const AuthEventSignUp({
+    required this.name,
     required this.email,
     required this.password,
     required this.confirmPassword,
   });
-}
-
-class AuthEventShouldSignUp extends AuthEvent {
-  // * ahora podemos volver a la pantalla anterior
-  // * PushRemoveUntil seria  AuthEventShouldSignUp(previusPage: null)
-  // * pero como sabemos si se toco el boton de retroceder?
-  final AuthState? previusPage;
-  const AuthEventShouldSignUp({required this.previusPage});
 }
 
 // ? mejor crear eventos solo para navegacion?
@@ -116,8 +115,6 @@ class AuthEventSignOut extends AuthEvent {
 // definir eventos solo para la navegacion pasar parámetros y parámetros opcionales
 // y retroceder con backbutton
 
-class GoToHomeScreen extends AuthEvent {}
-
 // ver los nulos
 class GoToProductDetail extends AuthEvent {
   // debería ser el objeto producto
@@ -142,6 +139,85 @@ class AuthEventNewTokenReceived extends AuthEvent {
   final String token;
   const AuthEventNewTokenReceived({required this.token});
 }
-class CancelarSuscripcion extends AuthEvent{
+
+// clases privadas _
+class CancelarSuscripcion extends AuthEvent {
   const CancelarSuscripcion();
 }
+
+// ? como se relacionan con el auth principal con el user ?
+// * Sign in with Social medias
+
+// * Google
+class AuthEventGoogleSignIn extends AuthEvent {
+  const AuthEventGoogleSignIn();
+}
+
+class AuthEventGoogleSignOut extends AuthEvent {
+  const AuthEventGoogleSignOut();
+}
+
+class AuthEventChangeSignInPage extends AuthEvent {
+  const AuthEventChangeSignInPage();
+}
+
+// ! otro  campo que se puede agregar a los estados  o eventos es si viene de un deeplink validarlos
+// ! para que no de errores en el .pop()
+
+class AuthEventRefreshToken extends AuthEvent {
+  const AuthEventRefreshToken();
+}
+
+// ! que pasa cuando la session es de larga duracion perdir alusuario
+// ! que vuelva a iniciar seession enviar otp u otp + password flujos
+class AuthEventDeleteAccount extends AuthEvent {
+  final String password;
+  const AuthEventDeleteAccount({required this.password});
+}
+
+class AuthEventSignUpVerifyOtp extends AuthEvent {
+  //final String otpId; lo obtendré desde el bloc no es algo que inserte el usuario
+  final String otpCode;
+  //final String email; lo obtendré desde el bloc no es algo que inserte el usuario
+
+  const AuthEventSignUpVerifyOtp({
+    //required this.otpId,
+    required this.otpCode,
+    //required this.email,
+  });
+}
+
+// TODO: hay que diferenciar entre las redirecciones y el gorouter que no se llene lapila
+// TODO: la idea es como trabajar juntos backbutton y cómo establecer las relaciones
+// TODO:  en cada redireccion limpiar la pila
+// TODO: como mantener elestado anterior
+
+class AuthEventEnableTwoFaSms extends AuthEvent {
+  final String accessToken;
+  final String phoneId;
+  const AuthEventEnableTwoFaSms(
+      {required this.accessToken, required this.phoneId,});
+}
+
+
+class AuthEventEnableTwoFaSmsVerifyOtp extends AuthEvent {
+  final String accessToken;
+  final String otpId;
+  final String otpCode;
+
+  const AuthEventEnableTwoFaSmsVerifyOtp({
+    required this.accessToken,
+    required this.otpId,
+    required this.otpCode,
+  });
+}
+
+class AuthEventTwoFaSmsVerifyOtp extends AuthEvent {
+  final String otpCode;
+
+  const AuthEventTwoFaSmsVerifyOtp({
+    required this.otpCode,
+  });
+}
+
+

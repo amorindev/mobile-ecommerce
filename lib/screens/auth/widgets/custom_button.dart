@@ -1,3 +1,4 @@
+import 'package:flu_go_jwt/design/foundations/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class CustomButton extends StatelessWidget {
         padding: const EdgeInsets.all(18),
         //margin: const EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: AppColors.brandColor,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Center(

@@ -1,0 +1,1 @@
+faltaría los enums de de los payments ver el tema de enums golang y flutter en ambos

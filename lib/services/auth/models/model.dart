@@ -1,36 +1,33 @@
-// To parse this JSON data, do
-//
-//     final session = sessionFromJson(jsonString);
-
-import 'dart:convert';
+/* import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:hive_ce_flutter/hive_flutter.dart';
 
-// * Para http por que dio parse internamente
-Session sessionFromJson(String str) => Session.fromJson(json.decode(str));
-String sessionToJson(Session data) => json.encode(data.toJson());
-// * ----------------------------------------
+AuthResponse authResponseFromJson(String str) =>
+    AuthResponse.fromJson(json.decode(str));
 
-// ? debe ser immutable o extender de equtable? pra el bloc
-// mejor userCredential por que la sesion es el accesstoke y refreshtoken
-class Session extends HiveObject with EquatableMixin {
-  String provider;
-  String accessToken;
-  String refreshToken;
-  User user;
+String authResponseToJson(AuthResponse data) => json.encode(data.toJson());
 
-  Session({
+class AuthResponse extends Equatable {
+  final String provider;
+  final String? accessToken;
+  final String? refreshToken;
+  final String? otpId;
+  final User user;
+  
+
+  const AuthResponse({
     required this.provider,
     required this.accessToken,
     required this.refreshToken,
+    required this.otpId,
     required this.user,
   });
 
-  factory Session.fromJson(Map<String, dynamic> json) => Session(
+  factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
         provider: json["provider"],
         accessToken: json["access_token"],
         refreshToken: json["refresh_token"],
+        otpId: json["otp_id"],
         user: User.fromJson(json["user"]),
       );
 
@@ -38,24 +35,39 @@ class Session extends HiveObject with EquatableMixin {
         "provider": provider,
         "access_token": accessToken,
         "refresh_token": refreshToken,
+        "otp_id": otpId,
         "user": user.toJson(),
       };
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [provider, accessToken, refreshToken, user];
+  List<Object?> get props => [provider, accessToken, refreshToken, otpId, user];
+
+  AuthResponse copyWith({
+    String? provider,
+    String? accessToken,
+    String? refreshToken,
+    String? otpId,
+    User? user,
+  }) {
+    return AuthResponse(
+      provider: provider ?? this.provider,
+      accessToken: accessToken ?? this.accessToken,
+      refreshToken: refreshToken ?? this.refreshToken,
+      otpId: otpId ?? this.otpId,
+      user: user ?? this.user,
+    );
+  }
 }
 
-class User extends HiveObject with EquatableMixin {
-  String id;
-  String email;
-  bool emailVerified;
-  List<Role> roles;
-  // ? o timestamp pegaria mi entidd a  protobuf?
-  DateTime createdAt;
-  DateTime updatedAt;
+class User extends Equatable {
+  final String id;
+  final String email;
+  final bool emailVerified;
+  final List<String> roles;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  User({
+  const User({
     required this.id,
     required this.email,
     required this.emailVerified,
@@ -68,7 +80,7 @@ class User extends HiveObject with EquatableMixin {
         id: json["id"],
         email: json["email"],
         emailVerified: json["email_verified"],
-        roles: List<Role>.from(json["roles"].map((x) => Role.fromJson(x))),
+        roles: List<String>.from(json["roles"].map((x) => x)),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -77,40 +89,13 @@ class User extends HiveObject with EquatableMixin {
         "id": id,
         "email": email,
         "email_verified": emailVerified,
-        "roles": List<dynamic>.from(roles.map((x) => x.toJson())),
+        "roles": List<dynamic>.from(roles.map((x) => x)),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
 
   @override
-  List<Object?> get props => [id, email, email, roles, createdAt, updatedAt];
+  List<Object?> get props =>
+      [id, email, emailVerified, roles, createdAt, updatedAt];
 }
-
-// falta hive?
-class Role extends Equatable {
-  String id;
-  String name;
-
-  Role({
-    required this.id,
-    required this.name,
-  });
-
-  factory Role.fromJson(Map<String, dynamic> json) => Role(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
-
-  @override
-  List<Object?> get props => [id, name];
-}
-
-//ver valores nulos generados desde el backend, flujo
-class Test {
-  String? test;
-}
+ */

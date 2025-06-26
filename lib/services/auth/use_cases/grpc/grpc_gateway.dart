@@ -1,8 +1,9 @@
-import 'package:flu_go_jwt/main.dart';
+/* import 'package:flu_go_jwt/main.dart';
 import 'package:flu_go_jwt/services/auth/gateway/auth_gateway.dart';
 import 'package:flu_go_jwt/services/auth/grpc/gen/auth_srv.pbgrpc.dart';
 import 'package:flu_go_jwt/services/auth/grpc/gen/sign_in.pb.dart';
 import 'package:flu_go_jwt/services/auth/models/model.dart';
+import 'package:flu_go_jwt/services/auth/services/local-storage/secure_storage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:grpc/grpc.dart';
 
@@ -62,12 +63,11 @@ class GrpcGateway implements AuthGateway {
       
     } */
 
-    // TODO: implement signUp
     throw UnimplementedError();
   }
 
   @override
-  Future<(Session?, Exception?)> signIn({
+  Future<(AuthResponse?, Exception?)> signIn({
     required String email,
     required String password,
     bool? rememberMe,
@@ -82,18 +82,18 @@ class GrpcGateway implements AuthGateway {
       );
       final resp = await _client.signIn(req);
 
-      List<Role> roles = [];
+     /*  List<Role> roles = [];
       // * Roles
       for (var rolePb in resp.user.roles) {
         final role = Role(id: rolePb.id, name: rolePb.name);
         roles.add(role);
-      }
+      } */
 
       // * Fechas
       final DateTime ca = resp.user.createdAt.toDateTime(toLocal: true);
       final DateTime ua = resp.user.updatedAt.toDateTime(toLocal: true);
 
-      final session = Session(
+      final session = AuthResponse(
         provider: resp.provider,
         accessToken: resp.accessToken,
         refreshToken: resp.refreshToken,
@@ -101,13 +101,13 @@ class GrpcGateway implements AuthGateway {
           id: resp.user.id,
           email: resp.user.email,
           emailVerified: resp.user.emailVerified,
-          roles: roles,
+          //roles: roles,
           createdAt: ca,
           updatedAt: ua,
         ),
       );
 
-      print(session);
+      //print(session);
       return (session, null);
     } catch (e) {
       return (null, Exception(e.toString()));
@@ -116,30 +116,47 @@ class GrpcGateway implements AuthGateway {
 
   @override
   Future<Exception?> signOut({required String refreshToken}) {
-    // TODO: implement signOut
     throw UnimplementedError();
   }
 
   @override
-  Future<(Session?, String?)> googleSignIn({required String tokenId}) {
-    // TODO: implement googleSignIn
+  Future<(AuthResponse?, String?)> googleSignIn({required String tokenId}) {
     throw UnimplementedError();
   }
 
   // con toknen ? o sin token como mnejar si es confirm passwrod o enviar email pra cambiar contraseña
   // ! verificar la cantidad de request por usurio en  el backend pra todos
   @override
-  Future<String?> sendEmailVerification({required String email}) {
-    // TODO: implement sendEmailVerification
+  Future<Exception?> sendEmailVerification({required String email}) {
     throw UnimplementedError();
   }
 
   @override
-  // TODO: implement currentUser
-  Future<Session?> get currentUser => throw UnimplementedError();
-  
-  @override
   Future<Exception?> sendForgotPassword({required String email}) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<(AuthResponse?, Exception?)> getUser({required String accessToken}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<(Session?, Exception)> refreshToken({
+    required String refreshToken,
+  }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future sendEmailVerificarionOTP({required email}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<(AuthResponse?, Exception?)> signUpVerifyOtp(
+      {required String otpId, required String otpCode, required String email}) {
+    throw UnimplementedError();
+  }
 }
+ */
