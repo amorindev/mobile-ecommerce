@@ -86,16 +86,16 @@ android {
             // no hay necesidad poner un sufijo para produccion
             //applicationIdSuffix ""
             // envs 
-            resValue "string", "google_maps_key", ""
+            resValue "string", "google_maps_key", "AIzaSyDZ5a1DSLGBeJXjxY-aTPJ__hOq48W1caE"
             // faltaria los links de live 
-            resValue "string", "branchio_link", ""
-            resValue "string", "branchio_alternative_link", ""
+            resValue "string", "branchio_link", "may7f.test-app.link"
+            resValue "string", "branchio_alternative_link", "may7f-alternate.test-app.link"
             // example: key_live_XXX, no lo encuentro de momento
             resValue "string", "branchio_key", ""
             // example: key_test_XXX
-            resValue "string", "branchio_key_test", ""
+            resValue "string", "branchio_key_test", "key_test_fte3v7bW0GCvUYhZ0WmOSecbDAbmLBgy"
             // testmode
-            resValue "string", "branchio_test_mode", ""
+            resValue "string", "branchio_test_mode", "true"
 
         }
     }

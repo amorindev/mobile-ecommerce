@@ -25,20 +25,41 @@ class OnboardingApiUseCase implements OnboardingGateway {
         final onboardingsResp = OnboardingsResponse.fromJson(resp.data);
         return (onboardingsResp.onboardings, null);
       }
-      //print("tttt ${resp.data}");
+      /* print("getOnboardings: ${resp.statusCode}");
+      print("getOnboardings ${resp.data}"); */
       // * ver el tema que status vamos a manejar 200 y configurar dio
       // * para que no se caiga la app
-      /* print("======================3");
-      print("!!!!!!!!!!!!!!!!!!!");
-      print(resp.statusCode);
+      /* print("getOnboardings ======================3");
+      print("getOnboardings !!!!!!!!!!!!!!!!!!!"); */
+      /* print(resp.statusCode);
       print(resp.data['message']);
-      print("!!!!!!!!!!!!!!!!!!!!!!!"); */
+      print("getOnboardings !!!!!!!!!!!!!!!!!!!!!!!"); */
       String errMsg;
       errMsg = resp.data['message'] ?? "err-msg-empty-getOnboardings";
       return (null, Exception(errMsg));
     } catch (e) {
-      //print("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr ${e.toString()}");
+      /* print("getOnboardings err ${e.toString()}"); */
       return (null, Exception(e.toString()));
     }
   }
 }
+/*
+@override
+  Future<(List<OrderResp>?, Exception?)> getAll({
+  }) async {
+    try {
+      if (resp.statusCode == 200) {
+        final ordersResp = OrdersResp.fromJson(resp.data);
+        return (ordersResp.orders, null);
+      }
+
+      String errMsg;
+      errMsg = resp.data['message'] ?? "err-msg-empty-getAllorders";
+      return (null, Exception(errMsg));
+    } catch (e) {
+      //print("order - getAll - ${e.toString()}");
+
+      return (null, Exception(e.toString()));
+    }
+  }
+ */
