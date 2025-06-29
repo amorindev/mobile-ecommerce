@@ -14,10 +14,8 @@ class ShowProvidersButtons extends StatefulWidget {
 class _ShowProvidersButtonsState extends State<ShowProvidersButtons> {
   @override
   Widget build(BuildContext context) {
-    return
-
-        /// * Da error cuando los elementos estan en una sola fila
-        Column(
+    // * Da error cuando los elementos estan en una sola fila
+    return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
