@@ -9,7 +9,7 @@ ProductsResponse productsResponseFromJson(String str) => ProductsResponse.fromJs
 
 String productsResponseToJson(ProductsResponse data) => json.encode(data.toJson()); */
 
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
 
 class ProductsResponse {
   final List<Product> products;

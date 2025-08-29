@@ -1,4 +1,4 @@
-import 'package:flu_go_jwt/services/onboarding/model/model.dart';
+import 'package:flu_go_jwt/services/onboarding/domain/domain_onboarding.dart';
 
 abstract class OnboardingGateway {
   // me parece que no necesita accestoken

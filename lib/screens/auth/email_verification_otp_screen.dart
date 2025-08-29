@@ -193,7 +193,7 @@ class _EmailVerificationOtpScreenState extends State<EmailVerificationOtpScreen>
                   CustomButton(
                     text: 'Resend',
                     onTap: () {
-                      context.read<AuthBloc>().add(const AuthEventSendEmailVerificationOTP());
+                      context.read<AuthBloc>().add(const AuthEventResendVerifyEmailOtp());
                     },
                   ),
                   CustomButton(
@@ -201,7 +201,7 @@ class _EmailVerificationOtpScreenState extends State<EmailVerificationOtpScreen>
                       final otpCode = "${_code1.text}${_code2.text}${_code3.text}";
                       final otpCode2 = "$otpCode${_code4.text}${_code5.text}${_code6.text}";
                       context.read<AuthBloc>().add(
-                            AuthEventSignUpVerifyOtp(
+                            AuthEventVerifyEmailOtp(
                               otpCode: otpCode2,
                             ),
                           );

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flu_go_jwt/services/ecomm/product/gateway/product_gateway.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';

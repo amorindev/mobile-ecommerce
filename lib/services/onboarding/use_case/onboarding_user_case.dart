@@ -1,5 +1,5 @@
 import 'package:flu_go_jwt/services/onboarding/gateway/onboarding_gateway.dart';
-import 'package:flu_go_jwt/services/onboarding/model/model.dart';
+import 'package:flu_go_jwt/services/onboarding/domain/domain_onboarding.dart';
 
 class OnboardingUserCase implements OnboardingGateway {
   final OnboardingGateway gateway;

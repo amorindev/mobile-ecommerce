@@ -1,15 +1,6 @@
 part of 'auth_bloc.dart';
 
-// ! usar solo copyWith con dataso que queremos guardar authresponse
-// ! o otpId pero no para redirect exception loading si no tendremos
-// ! comportamientos inesperados
-// * sirve agregar equatable a estas clases VerifyOtpStatus
-// * y como pasar el otpId entre estado anterior y actual
-// como manejar los copyEith en VerifyOtpStatus y los estados y no perder
-// como testear el bloc
-// ? usar correctameente estas clases para mostrar el error VerifyOtpStatus
-// ? y trabajo con ello  await showErrorDialog(context, verifyStatus.exception.toString());
-// * recuerda que ambos tanto Session como User deben estar dentro de equatable
+
 // * Agregar a todos props
 // ! lo que pasa aqui es que comparten las variables todos los estados
 // ! entonces por eso tenemos que verificar si es Sign in mostrar la carfa
@@ -56,7 +47,7 @@ abstract class AuthState extends Equatable {
  */
 class AuthStateUninitialized extends AuthState {
   const AuthStateUninitialized({
-    required super.isLoading,
+    super.isLoading = false,
     super.loadingText,
   });
 }

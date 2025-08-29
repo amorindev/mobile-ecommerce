@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flu_go_jwt/services/auth/local-storage/session_secure_storage.dart';
 import 'package:flu_go_jwt/services/onboarding/gateway/onboarding_gateway.dart';
-import 'package:flu_go_jwt/services/onboarding/model/model.dart';
+import 'package:flu_go_jwt/services/onboarding/domain/domain_onboarding.dart';
 
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';
@@ -42,9 +42,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         return;
       }
 
-      // ahora si seria mejor separarlo
-      // Onboarding shared preferences
-      await SessionSecureStorage.saveNewUser("false");
+      
 
       emit(OnboardingStateGetOnboardings(
         exception: null,

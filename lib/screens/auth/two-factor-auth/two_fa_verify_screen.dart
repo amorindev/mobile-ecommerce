@@ -146,7 +146,7 @@ class _TwoFaVerifyScreenState extends State<TwoFaVerifyScreen> {
                         );
                         return;
                       }
-                      context.read<AuthBloc>().add(AuthEventTwoFaSmsVerifyOtp(
+                      context.read<AuthBloc>().add(AuthEventVerifyMfaSmsOtp(
                             otpCode: otpCode,
                           ));
                     },

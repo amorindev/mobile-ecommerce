@@ -1,5 +1,5 @@
 import 'package:flu_go_jwt/services/ecomm/order/core/resp.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product_item.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product_item.dart';
 
 class OrderRequest {
   final double total;

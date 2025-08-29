@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flu_go_jwt/services/ecomm/order/core/req.dart';
 import 'package:flu_go_jwt/services/ecomm/order/core/resp.dart';
 import 'package:flu_go_jwt/services/ecomm/order/gateway/order_gateway.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product_item.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product_item.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OrderApiDioUseCase implements OrderGateway {

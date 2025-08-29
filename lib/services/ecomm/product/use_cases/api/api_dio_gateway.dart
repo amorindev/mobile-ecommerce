@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flu_go_jwt/services/ecomm/product/gateway/product_gateway.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
 import 'package:flu_go_jwt/services/ecomm/product/core/response.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

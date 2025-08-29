@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product_item.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product_item.dart';
 import 'package:flutter/foundation.dart';
 
 part 'cart_event.dart';

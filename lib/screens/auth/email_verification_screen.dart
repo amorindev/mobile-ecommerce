@@ -31,7 +31,7 @@ class VerifyEmailScreen extends StatelessWidget {
           TextButton(
             onPressed: () {
               context.read<AuthBloc>().add(
-                    const AuthEventSendEmailVerification(),
+                    const AuthEventResendVerifyEmailOtp(),
                   );
             },
             child: const Text('Send email verification'),
