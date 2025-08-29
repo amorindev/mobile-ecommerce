@@ -1,4 +1,4 @@
-import 'package:flu_go_jwt/services/auth/models/modelv2.dart';
+import 'package:flu_go_jwt/services/auth/domain/domainv2.dart';
 
 // ! ya no se va usar jwt sino otp codes ver si trabajan ambos para restablecer contraseña
 // ! vi que se usaban ambos ver
@@ -9,50 +9,33 @@ import 'package:flu_go_jwt/services/auth/models/modelv2.dart';
 //
 // ! de igual manera separar  las responses y rewquest
 abstract class AuthGateway {
-  // * Usuario se registra
-  // * necesito el auth por que incuye el otp_id no solo el user
-  Future<(AuthResponse?, Exception?)> signUp({
-    String? name, 
-    required String email,
-    required String password,
-    required String confirmPassword,
+
+  // Habilita MfaSms, String es el otpId
+  Future<(String?, Exception?)> enableMfaSms({
+    required String accessToken,
+    required String phoneId,
+  });
+
+  // * El usuario solicita un nuevo token y refreshtoken(Opcinal), si el actual expira
+  Future<(AuthResponse?, Exception?)> refreshToken({
+    //required String accessToken, // * de momento no lo vamos a invalidar
+    required String refreshToken,
   });
 
   // * Si no le llega el correo puede solicitar otro
   // ! verificar si es correcto, podiar ser un error o bool
-  Future<Exception?> sendEmailVerificarionOTP({
-    required String email,
-  });
+  Future<Exception?> resendVerifyEmailOtp({required String email});
 
-  // Auth templete se vasa en seguridad casos de uso
-  // retornar la session cuando se verifico
-  // TODO en el tema de verofyotp se esta retornando el user
-  // TODO asegurarse de cambiar solamente el user y no todo
-  // TODO se podria haber retornado todo el response pero con datos nulos ver
-  // * Envía el otp al backend para su validación
-  Future<(AuthResponse?, Exception?)> signUpVerifyOtp({
-    required String otpId,
-    required String otpCode,
-    required String email,
-  });
+  // ? verificar que exista el usuario
+  Future<Exception?> resendVerifyEnableMfaSmsOtp({required String email});
 
-  // * El usuario inicia session
+  Future<Exception?> resendVerifyMfaSmsOtp({required String email});
+
   Future<(AuthResponse?, Exception?)> signIn({
     required String email,
     required String password,
     bool? rememberMe,
   });
-
-  // esta bien usar otra entidad y no AuthResponse
-  // * El usuario solicita un nuevo token y refreshtoken(Opcinal), si el actual expira
-  Future<(Session?, Exception?)> refreshToken({
-    //required String accessToken, // * de momento no lo vamos a invalidar
-    required String refreshToken,
-  });
-
-  // ! Necesita en accesstoken ?
-  // ? debería retornar todo el auth dentro de auth es provider y dentor esta el user o solo el user
-  Future<(User?, Exception?)> getUser({required String accessToken});
 
   // otpid y session seran nulos
   // ! get session o credentials
@@ -67,32 +50,28 @@ abstract class AuthGateway {
   // * que paso seria cortante que no tenga conexion? de dio o algo asi ver
   Future<Exception?> signOut({required String refreshToken});
 
-  // ? verificar que exista el usuario
-  Future<Exception?> sendEmailVerification({required String email});
-
-  // eliminar tokens y enviar a la página de signin
-  Future<Exception?> deleteAccount({required accessToken, required password});
-
-  // desactivar cuenta aunque pueden
-  //Future<Exception?> deleteAccountPermanenteMente({required accessToken,required password});
-
-  // ! Falta el verify OTP
-
-  Future<(AuthResponse?, String?)> googleSignIn({required String tokenId});
-
-  // * Esto viene del singleton y no es Future
-  //Future<Session?> get currentUser;
-
-  Future<Exception?> sendForgotPassword({required String email});
-
-  // String es el otpId
-  Future<(String?, Exception?)> enableTwoFaSms({
-    required String accessToken,
-    required String phoneId,
+  // * Usuario se registra
+  // * necesito el auth por que incuye el otp_id no solo el user
+  Future<(AuthResponse?, Exception?)> signUpOtp({
+    String? name,
+    required String email,
+    required String password,
+    required String confirmPassword,
   });
 
-  //
-  Future<(User?, Exception?)> enableTwoFaSmsVerifyOtp({
+// Auth templete se vasa en seguridad casos de uso
+  // retornar la session cuando se verifico
+  // TODO en el tema de verofyotp se esta retornando el user
+  // TODO asegurarse de cambiar solamente el user y no todo
+  // TODO se podria haber retornado todo el response pero con datos nulos ver
+  // * Envía el otp al backend para su validación
+  Future<(AuthResponse?, Exception?)> verifyEmailOtp({
+    required String otpId,
+    required String otpCode,
+    required String email,
+  });
+
+  Future<(User?, Exception?)> verifyEnableMfaSmsOtp({
     required String accessToken,
     required String otpId,
     required String otpCode,
@@ -106,7 +85,7 @@ abstract class AuthGateway {
   // * lo mismo para phones /user/phones ver
   // * solo necesito eso  por que no tengo que actualizar mi user
   // * creo que no es necesario verificar si existe el usario y envirale el id
-  Future<(AuthResponse?, Exception?)> twoFaSmsVerifyOtp({
+  Future<(AuthResponse?, Exception?)> verifyMfaSmsOtp({
     required String otpId,
     required String otpCode,
   });

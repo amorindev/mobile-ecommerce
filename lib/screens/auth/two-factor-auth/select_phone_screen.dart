@@ -164,7 +164,7 @@ class _SelectPhoneScreenState extends State<SelectPhoneScreen> {
                     final accessToken =
                         authState.authResponse!.session!.accessToken;
                     context.read<AuthBloc>().add(
-                          AuthEventEnableTwoFaSms(
+                          AuthEventEnableMfaSms(
                             accessToken: accessToken,
                             phoneId: _selectedPhone!.id,
                           ),

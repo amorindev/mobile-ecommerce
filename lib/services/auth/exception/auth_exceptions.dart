@@ -23,6 +23,9 @@ class InvalidEmailAuthException implements Exception {}
 // generic exceptions
 
 class GenericAuthException implements Exception {
+  final String code;
+  final String msg;
+  GenericAuthException(this.code,this.msg);
   @override
   String toString() => "generic-exception";
 }

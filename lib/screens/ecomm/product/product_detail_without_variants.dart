@@ -1,4 +1,4 @@
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
 import 'package:flu_go_jwt/utils/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flu_go_jwt/design/foundations/app_colors.dart';

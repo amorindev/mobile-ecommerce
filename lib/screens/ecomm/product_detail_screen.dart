@@ -2,9 +2,9 @@
 
 import 'package:flu_go_jwt/design/foundations/app_colors.dart';
 import 'package:flu_go_jwt/services/ecomm/cart/bloc/cart_bloc.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product_item.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/variation.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product_item.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain.dart';
 import 'package:flu_go_jwt/utils/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

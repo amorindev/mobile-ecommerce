@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flu_go_jwt/services/onboarding/gateway/onboarding_gateway.dart';
-import 'package:flu_go_jwt/services/onboarding/model/model.dart';
+import 'package:flu_go_jwt/services/onboarding/domain/domain_onboarding.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OnboardingApiUseCase implements OnboardingGateway {

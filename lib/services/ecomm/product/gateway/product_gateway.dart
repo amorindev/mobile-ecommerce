@@ -1,4 +1,4 @@
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
 
 abstract class ProductGateway {
   // mejor devolver solo la lista de productos

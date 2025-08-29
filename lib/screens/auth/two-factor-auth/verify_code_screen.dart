@@ -165,7 +165,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     }
                     final accessToken = authState.authResponse!.session!.accessToken;
                     context.read<AuthBloc>().add(
-                          AuthEventEnableTwoFaSmsVerifyOtp(
+                          AuthEventVerifyEnableMfaSmsOtp(
                             accessToken: accessToken,
                             otpId: authState.twoFaData!.otpId!,
                             otpCode: otpCode,

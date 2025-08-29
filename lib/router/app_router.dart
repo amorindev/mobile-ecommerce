@@ -2,7 +2,6 @@ import 'package:flu_go_jwt/router/app_routes.dart';
 import 'package:flu_go_jwt/screens/addresses_screen.dart';
 import 'package:flu_go_jwt/screens/admin_screen.dart';
 import 'package:flu_go_jwt/screens/auth/change_password_screen.dart';
-import 'package:flu_go_jwt/screens/auth/delete_account_screen.dart';
 import 'package:flu_go_jwt/screens/auth/email_verification_otp_screen.dart';
 import 'package:flu_go_jwt/screens/auth/email_verified_screen.dart';
 import 'package:flu_go_jwt/screens/auth/forgot_password_screen.dart';
@@ -29,7 +28,7 @@ import 'package:flu_go_jwt/screens/ecomm/product/purchases_screen.dart';
 import 'package:flu_go_jwt/screens/ecomm/product/shipping_screen.dart';
 import 'package:flu_go_jwt/screens/profile_screen.dart';
 import 'package:flu_go_jwt/screens/settings_screen.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -297,7 +296,6 @@ class AppRouter {
                       key: state.pageKey,
                     ),
                   ),
-                  //
                   GoRoute(
                     path: 'two-factor-auth',
                     parentNavigatorKey: _rootNavKey,
@@ -331,13 +329,6 @@ class AppRouter {
                         ],
                       ),
                     ],
-                  ),
-                  GoRoute(
-                    path: 'delete-account',
-                    parentNavigatorKey: _rootNavKey,
-                    builder: (context, state) => DeleteAccountScreen(
-                      key: state.pageKey,
-                    ),
                   ),
                 ],
               ),

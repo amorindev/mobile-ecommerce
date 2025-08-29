@@ -1,5 +1,5 @@
 import 'package:flu_go_jwt/services/ecomm/product/gateway/product_gateway.dart';
-import 'package:flu_go_jwt/services/ecomm/product/model/product.dart';
+import 'package:flu_go_jwt/services/ecomm/product/domain/domain_product.dart';
 
 class UseCase implements ProductGateway {
   final ProductGateway gateway;

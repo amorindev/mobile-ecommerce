@@ -20,7 +20,3 @@ Future<void> signInBlocEvent(
   emit(const AuthStateSignedOut(exception: null, isLoading: false));
 
 }
-/* FutureOr<void> Function(AuthEventInitialize event, Emitter<AuthState> emit) handler(){
-  
-}
- */

@@ -1,6 +1,6 @@
 import 'package:flu_go_jwt/design/foundations/app_colors.dart';
 import 'package:flu_go_jwt/router/app_routes.dart';
-import 'package:flu_go_jwt/services/auth/models/modelv2.dart';
+import 'package:flu_go_jwt/services/auth/domain/domainv2.dart';
 import 'package:flu_go_jwt/services/ecomm/product/bloc/product_bloc.dart';
 import 'package:flu_go_jwt/utils/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
